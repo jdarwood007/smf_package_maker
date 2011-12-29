@@ -1,37 +1,12 @@
 <?php
-// Assets URL location.
-$assets = '/PacManGen/assets';
-
-// Style to use.
-$style = 'default';
-
-// How to handle downloads..
-$use_php = true;
-
-$page_title = 'SleePyCode Package Manager Generator';
-
-// Commenting out logo will remove it.
-$logo = $assets . '/logo.png';
-$logo_url = 'http://sleepycode.com';
-
-$language = 'english';
-
-/**********************************************************
-********** END OF SETTINGS *******************************/
-include(dirname(__FILE__) . '/language/' . $language . '.php');
-
-// Only invoke the download when it is enabled and we are going to try to do it.
-if ($use_php && isset($_GET['download']))
-{
-	/* We should at least try to verify the referrer */
-	if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME']) === false)
-		exit('Invalid Request Detected');
-
-		header('Cache-Control: ');
-		header('Content-type: text/plain');
-		header ('Content-Disposition: attachment; filename="install.xml"');
-		exit($_POST['content']);
-}
+/*
+ * SMF Package Manager Generator
+ * Author: SleePy (JeremyD)
+ * Repository: https://github.com/jdarwood007/smf_package_maker
+ * License: BSD 3 Clause; See license.txt
+*/
+require_once(dirname(__FILE__) . '/settings.php');
+require_once(dirname(__FILE__) . '/language/' . $language . '.php');
 
 echo '
 <!DOCTYPE html><!-- HTML 5 -->

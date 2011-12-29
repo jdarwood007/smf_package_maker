@@ -277,7 +277,7 @@ function download_file_generate()
 	$.generateFile({
 		filename	: "install.xml",
 		content		: $('#preview').text(),
-		script		: "index.php?download"
+		script		: "downloader.php?download"
 	});
 }
 
