@@ -8,16 +8,28 @@
 require_once(dirname(__FILE__) . '/settings.php');
 require_once(dirname(__FILE__) . '/language/' . $language . '.php');
 
+// Default our action.
+if (!isset($_GET['action']) || !in_array($_GET['action'], array('mod', 'info')))
+	$action = 'index';
+else
+	$action = $_GET['action'];
+
 echo '
 <!DOCTYPE html><!-- HTML 5 -->
 <html dir="ltr" lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>', $page_title, '</title>
-	<link rel="stylesheet" id="', $style, '-css" href="', $assets, '/', $style, '.css" type="text/css" media="all">
+	<link rel="stylesheet" id="', $style, '-css" href="', $assets, '/', $style, '.css" type="text/css" media="all">';
+
+// We don't need these on the index.
+if ($action != 'index')
+	echo '
 	<script type="text/javascript" src="', $assets, '/jquery.min.js"></script>
 	<script type="text/javascript" src="', $assets, '/', $use_php ? 'jquery.generateFile.js' : 'jquery.base64.js', '"></script>
-	<script type="text/javascript" src="', $assets, '/script.js"></script>
+	<script type="text/javascript" src="', $assets, '/script_', $action, '.js"></script>';
+
+echo '
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
@@ -32,12 +44,46 @@ if (!empty($logo))
 				<a href="', $logo_url, '"><img src="', $logo, '" alt="', $page_title, '" class="alignleft"></a>';
 
 echo '
-				<h1>', $text['script_name'], '</h1></div>
+				<h1><a href="index.php">', $text['script_name'], '</a></h1></div>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div id="container">
-		<div id="wrap">
+		<div id="wrap" class="action_', $action, '">';
+
+if ($action == 'mod')
+	mod_section();
+elseif ($action == 'info')
+	info_section();
+else
+	index_section();
+
+echo '
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<!-- Please give credit where credit is due -->
+	<div id="foot"><span class="alignright"><a href="http://sleepycode.com">SMF Package Manager Generator by JeremyD (SleePy)</a></span></div>
+	<div class="clear"></div>
+	</div>
+</div>';
+
+if ($action == 'mod')
+	mod_templates();
+elseif ($action == 'info')
+	info_section();
+
+echo '
+</body>
+</html>';
+
+/*
+ * This is the mod section code.
+*/
+function mod_section()
+{
+	echo '
 			<fieldset id="basic_info">
 				<legend>', $text['basic_info_header'], ' <span id="collapse_basic">^</span></legend>
 				<dl class="info">
@@ -77,17 +123,15 @@ echo '
 				<legend>', $text['preview_header'], '</legend>
 				<textarea id="preview" cols="150" rows="25"></textarea>
 			</fieldset>
-				<br />
-		</div>
-	</div>
-</div>
-<div id="footer">
-	<!-- Please give credit where credit is due -->
-	<div id="foot"><span class="alignright"><a href="http://sleepycode.com">SMF Package Manager Generator by JeremyD (SleePy)</a></span></div>
-	<div class="clear"></div>
-	</div>
-</div>
+				<br />';
+}
 
+/*
+ * This is the mod templates near the end of the page
+*/
+function mod_templates()
+{
+	echo '
 <!-- This is the container for a new file -->
 <!-- Do not remove any id attribute.  This makes the magic work! -->
 <div id="file_template" style="display: none;">
@@ -172,6 +216,20 @@ echo '
 					</dl>
 				</fieldset>
 				<br />
-</div>
-</body>
-</html>';
+</div>';
+}
+
+/*
+ * The index section
+*/
+function index_section()
+{
+	echo '
+		<br clear="all" />
+		<p id="welcome">Welcome to the SMF Package Maker.  Below are the simple three steps to packaging your modification.</p>
+		<ol id="steps">
+			<li><a href="index.php?action=mod">Mod Maker</a></li>
+			<li><a href="index.php?action=info">Package-Info Maker</a></li>
+			<li>Compress as .zip or .tgz (.tar.gz)</li>
+		</ol>';
+}
