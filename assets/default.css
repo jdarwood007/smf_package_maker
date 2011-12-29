@@ -1,0 +1,235 @@
+/*======================================
+Theme Name: zeeSynergie
+Theme URI: http://themezee.com/zeesynergie
+Description: zeeSynergie is a two column wordpress theme in an elegant and sleek design that fits perfectly for a blog or small business website. It is featured with a nice theme option panel where you can upload your logo, pick one of nine color schemes or choose your own one via colorpicker. The theme comes also with a beautiful featured post slider (3 options - fade, dropdown, horizontal), a banner ads widgets, integrated social media buttons, custom footer and a dropdown navigation.
+Version: 1.0.2
+Author: ThemeZee
+Author URI: http://themezee.com
+Tags: custom-background, custom-colors, custom-header, custom-menu, theme-options, threaded-comments, black, blue, brown, gray, green, orange, pink, purple, red, silver, tan, white, yellow, dark, light, editor-style, full-width-template, translation-ready, sticky-post, fixed-width, two-columns, one-column, right-sidebar
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+======================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, li, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+ol, ul
+{
+	list-style: none;
+}
+
+html
+{
+	font-size: 100.01%;
+}
+body
+{
+	font-family: verdana, arial;
+	font-size: 0.8em;
+	border: 0;
+	color: #111;
+	background: url(default/backgroud.png) repeat-x #eee;
+}
+img
+{
+	border: none;
+}
+.clear
+{
+	clear: both;
+}
+a, a:link, a:visited{
+	color: #333;
+	text-decoration: underline;
+}
+a:hover, a:active
+{
+	color: #777;
+	text-decoration: none;
+}
+input, textarea
+{
+	background-color: #f5f5f5; 
+	margin: 5px;
+	border: 1px solid #000;
+	color: #333;
+}
+
+#wrapper
+{
+	width: 100%;
+	min-width: 1000px;
+}
+
+#header
+{
+	padding: 0;
+	background: url(default/header.png) repeat-x #333;
+}
+#head
+{
+	width: 80%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+#logo img
+{
+	border: 0;
+	padding: 5px 0;
+}
+#logo h1
+{
+	font-size: 2.5em;
+	color: #fff;
+	font-family: 'Paytone One', Verdana, Arial;
+}
+
+#container{
+	width: 90%;
+	max-width: 1227px;
+	margin: 0 auto;
+}
+#wrap
+{
+	width: 100%;
+	background: #fff;
+	min-height: 41em;
+}
+#content
+{
+	float: left;
+	width: 82%;
+	margin: 5px 0;
+}
+
+#footer
+{
+	clear: both;
+	background: url(default/footer.png) repeat #333;
+	padding-bottom: 80px;
+}
+#foot
+{
+	margin: 0 auto;
+	width: 88%;
+	max-width: 1200px;
+	background: url(default/navi.png) repeat;
+	color: #fff;
+	padding: 10px 1% 30px 1%;
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+
+#foot a
+{
+	color: #fff;
+}
+
+#foot a:hover
+{
+	color: #eee;
+	text-decoration: none;
+}
+
+dl.info dt
+{
+	clear: both;
+	float: left;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 48%;
+}
+dl.info dd
+{
+	float: left;
+	margin: 0 0 3px;
+	padding: 0;
+	width: 48%;
+}
+
+
+dl.edits dt
+{
+	clear: both;
+	float: left;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 15em;
+}
+dl.edits dd
+{
+	float: left;
+	margin: 0 0 3px;
+	padding: 0;
+}
+
+
+@font-face
+{
+	font-family: 'Paytone One';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Paytone One'), local('PaytoneOne'), url('http://themes.googleusercontent.com/static/fonts/paytoneone/v4/D_d4Nj6jwG2cmUCLYeqgKYbN6UDyHWBl620a-IRfuBk.woff') format('woff');
+}
+
+.alignleft
+{
+	float: left;
+}
+.alignright
+{
+	float: right;
+}
+
+#basic_info
+{
+	float: left;
+	margin-left: 10%;
+}
+#details_info
+{
+	float: right;
+	margin-right: 10%;
+
+}
+
+#basic_info, #details_info
+{
+	padding: 5px 10px;
+	background: #eee;
+	max-width: 25em;
+}
+
+#basic_info legend, #details_info legend
+{
+	padding: 3px 3px 1px 3px;
+	border-bottom: 1px solid #000;
+	background: #fff;
+}
+
+fieldset.edits
+{
+	padding: 5px 10px;
+	margin: 0 10px;
+	background: #eee;
+}
+
+fieldset.edits legend
+{
+	width: 100%;
+	background: transparent;
+}
+
+.pad
+{
+	padding-left: 3em;
+}
