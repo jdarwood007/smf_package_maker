@@ -1,13 +1,30 @@
+/*
+ * SMF Package Manager Generator
+ * Author: SleePy (JeremyD)
+ * Repository: https://github.com/jdarwood007/smf_package_maker
+ * License: BSD 3 Clause; See license.txt
+*/
+
+/* This gets things going once the document has loaded, also makes sure JQuery is here. */
 $(document).ready(function(){
+	/* Start off some counting */
 	file_count = 1;
 	edit_count =new Array();
 	edit_count[file_count] = 1;
 
+	/* Kick things off by creating a file. */
 	create_new_file();
 
 	$('#add_file').click(create_new_file);
 
+	/* Give our buttons some actions. */
 	$('#show_preview').click(show_edit_preview);
+
+	/* The details and basic buttons. */
+	$('#collapse_basic').click(function(){$('#basic_info .info').hide(); $('#collapse_basic').hide(); $('#restore_basic').show();});
+	$('#restore_basic').click(function(){$('#basic_info .info').show(); $('#restore_basic').hide(); $('#collapse_basic').show();});
+	$('#collapse_details').click(function(){$('#details_info .info').hide(); $('#collapse_details').hide(); $('#restore_details').show();});
+	$('#restore_details').click(function(){$('#details_info .info').show(); $('#restore_details').hide(); $('#collapse_details').show();});
 });
 
 /* Handles adding files */

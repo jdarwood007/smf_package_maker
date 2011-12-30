@@ -1,4 +1,10 @@
 <?php
+/*
+ * SMF Package Manager Generator
+ * Author: SleePy (JeremyD)
+ * Repository: https://github.com/jdarwood007/smf_package_maker
+ * License: BSD 3 Clause; See license.txt
+*/
 
 // The locale 
 $locale = 'en-US';

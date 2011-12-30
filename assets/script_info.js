@@ -1,13 +1,29 @@
+/*
+ * SMF Package Manager Generator
+ * Author: SleePy (JeremyD)
+ * Repository: https://github.com/jdarwood007/smf_package_maker
+ * License: BSD 3 Clause; See license.txt
+*/
+
+/* This gets things going once the document has loaded, also makes sure JQuery is here. */
 $(document).ready(function(){
+	/* Start off some counting */
 	action_count = 1;
 	instruct_count =new Array();
 	instruct_count[action_count] = 1;
 
+	/* Kick things off by creating a new action. */
 	create_new_action();
 
+	/* Give our buttons some actions. */
 	$('#add_action').click(create_new_action);
-
 	$('#show_preview').click(show_instruct_preview);
+
+	/* The details and basic buttons. */
+	$('#collapse_basic').click(function(){$('#basic_info .info').hide(); $('#collapse_basic').hide(); $('#restore_basic').show();});
+	$('#restore_basic').click(function(){$('#basic_info .info').show(); $('#restore_basic').hide(); $('#collapse_basic').show();});
+	$('#collapse_details').click(function(){$('#details_info .info').hide(); $('#collapse_details').hide(); $('#restore_details').show();});
+	$('#restore_details').click(function(){$('#details_info .info').show(); $('#restore_details').hide(); $('#collapse_details').show();});
 });
 
 /* Handles adding actions */
@@ -48,8 +64,10 @@ function create_new_instruct()
 	$('#action-' + action_index + '-instruct_container .delete_change').click(delete_instruct);
 	$('#action-' + action_index + '-instruct_container .restore_change').click(restore_instruct);
 
-	$('#action-' + action_index + '-instruct_container .instruct_action').change(instruct_change);
+	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-action').change(instruct_change);
 	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-action').change();
+
+	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-inline').change(instruct_inline);
 
 	instruct_count[action_index]++;
 
@@ -59,9 +77,6 @@ function create_new_instruct()
 /* Handles a change in the instruction */
 function instruct_change()
 {
-/*	action_index = $(selected).attr('data-action');
-	instruct_index = $(selected).attr('data-instruct');
-	this_act = $(selected).val();*/
 	action_index = $(this).attr('data-action');
 	instruct_index = $(this).attr('data-instruct');
 	this_act = $(this).val();
@@ -101,9 +116,6 @@ function instruct_change()
 
 		$('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
 		$('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').show();
-
-		/* Set our inline option */
-		instruct_inline($('#action-' + action_index + '-instruct-' + instruct_index + '-inline'));
 	}
 	else
 	{
@@ -114,11 +126,11 @@ function instruct_change()
 }
 
 /* Handles clicking the inline button */
-function instruct_inline(selected)
+function instruct_inline()
 {
-	action_index = $(selected).attr('data-action');
-	instruct_index = $(selected).attr('data-instruct');
-	is_inline = $(selected).is(':checked');
+	action_index = $(this).attr('data-action');
+	instruct_index = $(this).attr('data-instruct');
+	is_inline = $(this).is(':checked');
 
 	if (is_inline)
 	{
@@ -324,17 +336,12 @@ function show_instruct_preview()
 
 				if (instruct_inline && $.inArray(instruct_action, ["code", "database", "readme"]) > -1)
 				{
-					preview += ' inline="true"';
-				}
-
-				if (instruct_inline && $.inArray(instruct_action, ["code", "database", "readme"]) > -1)
-				{
-					preview += '>' + instruct_block + "\n" + '\
+					preview += ' inline="true">' + "\n" + instruct_block + "\n" + '\
 		</' + instruct_action + '>';
 				}
 				else
 				{
-					preview += " />\n";
+					preview += '>' + instruct_source + '</' + instruct_action + ">\n";
 				}
 			}
 			else if ($.inArray(instruct_action, ["create-dir", "create-file", "remove-dir", "remove-file"]) > -1)
