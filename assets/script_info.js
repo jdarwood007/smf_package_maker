@@ -247,7 +247,7 @@ function restore_action()
 	$('#action-' + action_index + '-delete').val('0');
 
 	/* Then we hide this header, collapse the instruct and show the restore button */
-	$('#action-' + action_index + '-instruct-' + instruct_index + ' .instructs').show();
+	$('#action-' + action_index + '-instruct_container').show();
 	$('#action-' + action_index + ' .delete_action').show();
 	$(this).hide();
 

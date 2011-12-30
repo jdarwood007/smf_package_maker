@@ -172,7 +172,7 @@ function restore_file()
 	$('#file-' + file_index + '-delete').val('0');
 
 	/* Then we hide this header, collapse the edit and show the restore button */
-	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
+	$('#file-' + file_index + '-edit_container').show();
 	$('#file-' + file_index + ' .delete_file').show();
 	$(this).hide();
 
