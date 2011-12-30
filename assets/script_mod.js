@@ -22,14 +22,14 @@ function create_new_file()
 	/* Now we pretend to click said element */
 	$('#file-' + file_count).find('.add_edit').click();
 
+	$('#file-' + file_count + ' .collapse_file').click(collapse_file);
+	$('#file-' + file_count + ' .expand_file').click(expand_file);
+	$('#file-' + file_count + ' .delete_file').click(delete_file);
+	$('#file-' + file_count + ' .restore_file').click(restore_file);
+
 	/* Move the index and add defaults */
 	file_count++;
 	edit_count[file_count] = 1;
-
-	$('#file-' + file_index + ' .collapse_file').click(collapse_file);
-	$('#file-' + file_index + ' .expand_file').click(expand_file);
-	$('#file-' + file_index + ' .delete_file').click(delete_file);
-	$('#file-' + file_index + ' .restore_file').click(restore_file);
 
 	update_counter();
 }
@@ -298,7 +298,7 @@ function update_counter()
 	temp_edit_count = 0;
 	temp_line_count = 0;
 
-	/* Because of deleted files, we may have to skip this */
+	/* Because of deleted actions, we can't simply use length */
 	for (i = 1; i < file_count; i++)
 	{
 		/* Skip this edit if we deleted it. */
