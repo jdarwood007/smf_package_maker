@@ -48,12 +48,17 @@ if (!empty($logo))
 				<a href="', $logo_url, '"><img src="', $logo, '" alt="', $page_title, '" class="alignleft"></a>';
 
 echo '
-				<h1><a href="index.php">', $text['script_name'], '</a></h1></div>
+				<h1><a href="', $scriptname, '">', $text['script_name'], '</a></h1></div>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div id="container">
 		<div id="wrap" class="action_', $action, '">';
+
+// If we are using the PHP downloader, we need this.
+if ($use_php)
+	echo '
+			<input type="hidden" id="downloadername" value="', $downloadname, '" />';
 
 // Call up the right section.
 $function = $action . '_section';

@@ -388,9 +388,9 @@ function download_action_generate()
 	show_instruct_preview();
 
 	$.generateaction({
-		actionname	: "install.xml",
+		actionname	: 'install.xml',
 		content		: $('#preview').text(),
-		script		: "downloader.php?download"
+		script		: $('#downloadername').val() + '?download'
 	});
 }
 
@@ -401,7 +401,7 @@ function download_action_data()
 	data = $.base64.encode($('#preview').text());
 
 	/* No actionname can be specified by a data URI */
-	window.location = "data:application/octet-stream;charset=utf-8;base64," + data;
+	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;
 }
 
 /* Updates our details counters */

@@ -10,6 +10,12 @@ if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access re
 // Assets URL location.
 $assets = '/PacManGen/assets';
 
+// The name of this script (can also be the url).
+$scriptname = 'index.php';
+
+// The name of this script (can also be the url).
+$downloadname = 'downloader.php';
+
 // Style to use.
 $style = 'default';
 
@@ -22,4 +28,5 @@ $page_title = 'SleePyCode Package Manager Generator';
 $logo = $assets . '/logo.png';
 $logo_url = 'http://sleepycode.com';
 
+// Language we selected.
 $language = 'english';

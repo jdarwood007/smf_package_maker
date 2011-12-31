@@ -12,14 +12,14 @@ if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access re
 */
 function index_section()
 {
-	global $text;
+	global $text, $scriptname;
 
 	echo '
 		<br clear="all" />
 		<p id="welcome">', $text['index_welcome'], '.</p>
 		<ol id="steps">
-			<li><a href="index.php?action=mod">', $text['index_mod'], '</a></li>
-			<li><a href="index.php?action=info">', $text['index_info'], '</a></li>
+			<li><a href="', $scriptname, '?action=mod">', $text['index_mod'], '</a></li>
+			<li><a href="', $scriptname, '?action=info">', $text['index_info'], '</a></li>
 			<li>', $text['index_compress'], '</li>
 		</ol>';
 }

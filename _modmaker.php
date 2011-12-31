@@ -12,7 +12,7 @@ if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access re
 */
 function mod_section()
 {
-	global $text;
+	global $text, $use_php;
 
 	echo '
 			<fieldset id="basic_info">

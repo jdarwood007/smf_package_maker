@@ -292,9 +292,9 @@ function download_file_generate()
 	show_edit_preview();
 
 	$.generateFile({
-		filename	: "install.xml",
+		filename	: 'install.xml',
 		content		: $('#preview').text(),
-		script		: "downloader.php?download"
+		script		: $('#downloadername').val() + '?download'
 	});
 }
 
@@ -305,7 +305,7 @@ function download_file_data()
 	data = $.base64.encode($('#preview').text());
 
 	/* No filename can be specified by a data URI */
-	window.location = "data:application/octet-stream;charset=utf-8;base64," + data;
+	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;
 }
 
 /* Updates our details counters */
