@@ -8,25 +8,32 @@
 if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access restricted');}
 
 // Assets URL location.
-$assets = '/PacManGen/assets';
+$pmg['assets'] = 'http://sleepycode.com/PacManGen/assets';
 
 // The name of this script (can also be the url).
-$scriptname = 'index.php';
+$pmg['scriptname'] = 'index.php';
 
 // The name of this script (can also be the url).
-$downloadname = 'downloader.php';
+$pmg['downloadname'] = 'downloader.php';
 
 // Style to use.
-$style = 'default';
+$pmg['style'] = 'default';
+
+// Integration with another site.
+$pmg['theme_integration'] = true;
+
+// If we are integrating, what file to include.  Needs to have pacman_header and pacmanfooter
+$pmg['theme_integration_file'] = '__integrate.php';
 
 // How to handle downloads..
-$use_php = true;
+$pmg['use_php'] = true;
 
-$page_title = 'SleePyCode Package Manager Generator';
+// The page title.
+$pmg['page_title'] = 'SleePyCode Package Manager Generator';
 
 // Commenting out logo will remove it.
-$logo = $assets . '/logo.png';
-$logo_url = 'http://sleepycode.com';
+$pmg['logo'] = $pmg['assets'] . '/logo.png';
+$pmg['logo_url'] = 'http://sleepycode.com';
 
 // Language we selected.
-$language = 'english';
+$pmg['language'] = 'english';

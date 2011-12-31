@@ -93,16 +93,11 @@ input, textarea
 	font-family: 'Paytone One', Verdana, Arial;
 }
 
-#container{
+#container
+{
 	width: 90%;
 	max-width: 1227px;
 	margin: 0 auto;
-}
-#wrap
-{
-	width: 100%;
-	background: #fff;
-	min-height: 41em;
 }
 #content
 {
@@ -128,7 +123,6 @@ input, textarea
 	border-bottom-left-radius: 1em;
 	border-bottom-right-radius: 1em;
 }
-
 #foot a
 {
 	color: #fff;
@@ -138,6 +132,14 @@ input, textarea
 {
 	color: #eee;
 	text-decoration: none;
+}
+
+/*** The Specific CSS starts here, the rest is the headers, footers and general ***/
+#pacmangen
+{
+	width: 100%;
+	background: #fff;
+	min-height: 41em;
 }
 
 dl.info dt
@@ -156,7 +158,6 @@ dl.info dd
 	width: 48%;
 }
 
-
 dl.edits dt
 {
 	clear: both;
@@ -171,7 +172,6 @@ dl.edits dd
 	margin: 0 0 3px;
 	padding: 0;
 }
-
 
 @font-face
 {
@@ -199,7 +199,6 @@ dl.edits dd
 {
 	float: right;
 	margin-right: 10%;
-
 }
 
 #basic_info, #details_info
@@ -221,6 +220,15 @@ fieldset.edits
 	padding: 5px 10px;
 	margin: 0 10px;
 	background: #eee;
+	border: 1px solid #000;
+}
+
+fieldset.edits fieldset
+{
+	padding: 5px 10px;
+	background: #eee;
+	border: 1px solid #000;
+	border-top: 1px dotted #000;
 }
 
 fieldset.edits legend

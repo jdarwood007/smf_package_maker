@@ -12,10 +12,10 @@ if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access re
 */
 function info_section()
 {
-	global $text, $use_php;
+	global $text, $pmg;
 
 	echo '
-			<fieldset id="basic_info">
+			<fieldset id="basic_info" class="edits">
 				<legend>
 					', $text['basic_info_header'], '
 					<a href="#" id="collapse_basic">[', $text['button_collapse'], ']</a>
@@ -43,7 +43,7 @@ function info_section()
 
 				</dl>
 			</fieldset>
-			<fieldset id="details_info">
+			<fieldset id="details_info" class="edits">
 				<legend>
 					', $text['details_header'], '
 					<a href="#" id="collapse_details">[', $text['button_collapse'], ']</a>
@@ -64,7 +64,7 @@ function info_section()
 			</form>
 			<input type="button" id="add_action" value="', $text['button_add_action'], '" />
 			<input type="button" id="show_preview" value="', $text['button_preview'], '" />
-			<input type="button" id="download_file" value="', $text['button_download'], '" onclick="download_file_', ($use_php ? 'generate' : 'data'), '()" />
+			<input type="button" id="download_file" value="', $text['button_download'], '" onclick="download_action_', ($pmg['use_php'] ? 'generate' : 'data'), '()" />
 			<br />
 			<fieldset id="preview_container" style="display: none;" class="edits" >
 				<legend>', $text['preview_header'], '</legend>

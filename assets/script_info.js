@@ -387,8 +387,8 @@ function download_action_generate()
 {
 	show_instruct_preview();
 
-	$.generateaction({
-		actionname	: 'install.xml',
+	$.generateFile({
+		filename	: 'package-info.xml',
 		content		: $('#preview').text(),
 		script		: $('#downloadername').val() + '?download'
 	});

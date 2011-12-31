@@ -9,31 +9,83 @@ define('PacManGen', true);
 
 // Default our action.
 if (!isset($_GET['action']) || !in_array($_GET['action'], array('mod', 'info')))
-	$action = 'index';
+	$pmg_action = 'index';
 else
-	$action = $_GET['action'];
+	$pmg_action = $_GET['action'];
 
 // Load up some files.
 require_once(dirname(__FILE__) . '/settings.php');
-require_once(dirname(__FILE__) . '/_' . $action . 'maker.php');
-require_once(dirname(__FILE__) . '/language/' . $language . '.php');
+require_once(dirname(__FILE__) . '/_' . $pmg_action . 'maker.php');
+require_once(dirname(__FILE__) . '/language/' . $pmg['language'] . '.php');
+
+if (!empty($pmg['theme_integration_file']) && isset($pmg['theme_integration_file']) && file_exists($pmg['theme_integration_file']))
+	require_once($pmg['theme_integration_file']);
+
+$headers['css'][] = array('name' => $pmg['style'] . '-css', 'href' => $pmg['assets'] . '/' . $pmg['style'] . '.css', 'media' => 'all');
+
+// We don't need these on the index.
+if ($pmg_action != 'index')
+{
+	$headers['js'][] = array('name' => 'jquery', 'src' => $pmg['assets'] . '/jquery.min.js');
+	$headers['js'][] = array('name' => 'generatefile', 'src' => $pmg['assets'] . '/' . ($pmg['use_php'] ? 'jquery.generateFile.js' : 'jquery.base64.js'));
+	$headers['js'][] = array('name' => 'script', 'src' => $pmg['assets'] . '/script_' . $pmg_action . '.js');
+}
+
+if (!empty($pmg['theme_integration']) && function_exists('pacman_header'))
+	pacman_header($headers);
+else
+	default_pacman_header($headers);
+
+	echo '
+		<div id="pacmangen" class="action_', $pmg_action, '">';
+
+// If we are using the PHP downloader, we need this.
+if (!empty($pmg['use_php']))
+	echo '
+			<input type="hidden" id="downloadername" value="', $pmg['downloadname'], '" />';
+
+// Call up the right section.
+$function = $pmg_action . '_section';
+$function();
 
 echo '
+		</div>';
+
+// Bring in the correct templates.
+$function = $pmg_action . '_templates';
+$function();
+
+if (!empty($pmg['theme_integration']) && function_exists('pacman_footer'))
+	pacman_footer();
+else
+	default_pacman_footer();
+
+function default_pacman_header($headers)
+{
+	global $pmg, $locale, $charset, $text;
+
+	echo '
 <!DOCTYPE html><!-- HTML 5 -->
 <html dir="ltr" lang="', $locale, '">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=', $charset, '">
-	<title>', $page_title, '</title>
-	<link rel="stylesheet" id="', $style, '-css" href="', $assets, '/', $style, '.css" type="text/css" media="all">';
+	<title>', $pmg['page_title'], '</title>';
 
-// We don't need these on the index.
-if ($action != 'index')
+	if (!empty($headers['css']))
+		foreach ($headers['css'] as $css)
+			echo '
+		<link rel="stylesheet" id="', $css['name'], '" href="', $css['href'], '" type="text/css" media="', !empty($css['media']) ? $css['media'] : 'all', '">';
+
+	if (!empty($headers['js']))
+		foreach ($headers['js'] as $js)
+			echo '
+		<script type="text/javascript" src="', $js['src'], '"></script>';
+
+	if (!empty($headers['others']))
+		echo explode('
+		', $headers['others']);
+
 	echo '
-	<script type="text/javascript" src="', $assets, '/jquery.min.js"></script>
-	<script type="text/javascript" src="', $assets, '/', $use_php ? 'jquery.generateFile.js' : 'jquery.base64.js', '"></script>
-	<script type="text/javascript" src="', $assets, '/script_', $action, '.js"></script>';
-
-echo '
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
@@ -43,29 +95,21 @@ echo '
 		<div id="head">
 			<div id="logo">';
 
-if (!empty($logo))
-	echo '
-				<a href="', $logo_url, '"><img src="', $logo, '" alt="', $page_title, '" class="alignleft"></a>';
+	if (!empty($pmg['logo']))
+		echo '
+				<a href="', $pmg['logo_url'], '"><img src="', $pmg['logo'], '" alt="', $pmg['page_title'], '" class="alignleft"></a>';
 
-echo '
-				<h1><a href="', $scriptname, '">', $text['script_name'], '</a></h1></div>
+	echo '
+				<h1><a href="', $pmg['scriptname'], '">', $text['script_name'], '</a></h1></div>
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div id="container">
-		<div id="wrap" class="action_', $action, '">';
+	<div id="container">';
+}
 
-// If we are using the PHP downloader, we need this.
-if ($use_php)
+function default_pacman_footer()
+{
 	echo '
-			<input type="hidden" id="downloadername" value="', $downloadname, '" />';
-
-// Call up the right section.
-$function = $action . '_section';
-$function();
-
-echo '
-		</div>
 	</div>
 </div>
 <div id="footer">
@@ -75,10 +119,8 @@ echo '
 	</div>
 </div>';
 
-// Bring in the correct templates.
-$function = $action . '_templates';
-$function();
-
-echo '
+	echo '
 </body>
 </html>';
+
+}
