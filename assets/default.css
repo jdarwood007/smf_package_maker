@@ -43,11 +43,13 @@ img
 {
 	border: none;
 }
+
 .clear
 {
 	clear: both;
 }
-a, a:link, a:visited{
+a, a:link, a:visited
+{
 	color: #333;
 	text-decoration: underline;
 }
@@ -58,7 +60,7 @@ a:hover, a:active
 }
 input, textarea
 {
-	background-color: #f5f5f5; 
+	background-color: #f5f5f5;
 	margin: 5px;
 	border: 1px solid #000;
 	color: #333;
@@ -75,17 +77,20 @@ input, textarea
 	padding: 0;
 	background: url(default/header.png) repeat-x #333;
 }
+
 #head
 {
 	width: 80%;
 	max-width: 1200px;
 	margin: 0 auto;
 }
+
 #logo img
 {
 	border: 0;
 	padding: 5px 0;
 }
+
 #logo h1 a
 {
 	font-size: 2.5em;
@@ -99,6 +104,7 @@ input, textarea
 	max-width: 1227px;
 	margin: 0 auto;
 }
+
 #content
 {
 	float: left;
@@ -112,6 +118,7 @@ input, textarea
 	background: url(default/footer.png) repeat #333;
 	padding-bottom: 80px;
 }
+
 #foot
 {
 	margin: 0 auto;
@@ -123,6 +130,7 @@ input, textarea
 	border-bottom-left-radius: 1em;
 	border-bottom-right-radius: 1em;
 }
+
 #foot a
 {
 	color: #fff;
@@ -140,6 +148,23 @@ input, textarea
 	width: 100%;
 	background: #fff;
 	min-height: 41em;
+}
+
+/* Fixes some wordpress integrations */
+.entry #pacmangen
+{
+	margin-top: -2em;
+	margin-bottom: -5em;
+}
+
+#preview_container #preview
+{
+	width: 100%;
+}
+
+.floatbuttons
+{
+	float: right;
 }
 
 dl.info dt
@@ -185,6 +210,7 @@ dl.edits dd
 {
 	float: left;
 }
+
 .alignright
 {
 	float: right;
@@ -195,6 +221,7 @@ dl.edits dd
 	float: left;
 	margin-left: 10%;
 }
+
 #details_info
 {
 	float: right;
@@ -258,3 +285,7 @@ fieldset.edits legend
 	width: 100%;
 }
 
+.action_index ol li
+{
+	line-height: 2em;
+}

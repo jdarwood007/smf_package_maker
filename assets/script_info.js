@@ -331,7 +331,7 @@ function show_instruct_preview()
 					Code can just check $context['uninstall'] or use another file*/
 				if (instruct_reverse && instruct_action == 'modification')
 				{
-					preview += ' reverse="true"'; 
+					preview += ' reverse="true"';
 				}
 
 				if (instruct_inline && $.inArray(instruct_action, ["code", "database", "readme"]) > -1)

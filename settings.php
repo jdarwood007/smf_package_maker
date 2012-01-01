@@ -8,7 +8,7 @@
 if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access restricted');}
 
 // Assets URL location.
-$pmg['assets'] = 'http://sleepycode.com/PacManGen/assets';
+$pmg['assets'] = './assets';
 
 // The name of this script (can also be the url).
 $pmg['scriptname'] = 'index.php';
@@ -20,7 +20,7 @@ $pmg['downloadname'] = 'downloader.php';
 $pmg['style'] = 'default';
 
 // Integration with another site.
-$pmg['theme_integration'] = true;
+$pmg['theme_integration'] = false;
 
 // If we are integrating, what file to include.  Needs to have pacman_header and pacmanfooter
 $pmg['theme_integration_file'] = '__integrate.php';
@@ -29,7 +29,7 @@ $pmg['theme_integration_file'] = '__integrate.php';
 $pmg['use_php'] = true;
 
 // The page title.
-$pmg['page_title'] = 'SleePyCode Package Manager Generator';
+$pmg['page_title'] = 'SMF Package Manager Generator';
 
 // Commenting out logo will remove it.
 $pmg['logo'] = $pmg['assets'] . '/logo.png';

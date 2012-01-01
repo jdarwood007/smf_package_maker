@@ -68,7 +68,7 @@ function info_section()
 			<br />
 			<fieldset id="preview_container" style="display: none;" class="edits" >
 				<legend>', $text['preview_header'], '</legend>
-				<textarea id="preview" cols="150" rows="25"></textarea>
+				<textarea id="preview" rows="25"></textarea>
 			</fieldset>
 				<br />';
 
@@ -88,7 +88,7 @@ function info_templates()
 			<fieldset id="action-#ACTIONINDEX#" class="edits">
 				<input type="hidden" id="action-#ACTIONINDEX#-delete" value="0" />
 				<legend>
-					<span class="alignright">
+					<span class="floatbuttons">
 						<a href="#" class="delete_action" data-action="#ACTIONINDEX#">[', $text['button_delete'], ']</a>
 						<a href="#" class="restore_action" data-action="#ACTIONINDEX#" style="display: none;">[', $text['button_restore'], ']</a>
 						&nbsp;&mdash;&nbsp;
@@ -123,7 +123,7 @@ function info_templates()
 				<fieldset id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#" class="edit">
 					<input type="hidden" id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#-delete" value="0" />
 					<legend>
-						<span class="alignright">
+						<span class="floatbuttons">
 							<a href="#" class="delete_change" data-action="#ACTIONINDEX#" data-instruct="#INSTRUCTINDEX#">[', $text['button_delete'], ']</a>
 							<a href="#" class="restore_change" data-action="#ACTIONINDEX#" data-instruct="#INSTRUCTINDEX#" style="display: none;">[', $text['button_restore'], ']</a>
 							&nbsp;&mdash;&nbsp;

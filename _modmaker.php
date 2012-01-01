@@ -60,7 +60,7 @@ function mod_section()
 			<br />
 			<fieldset id="preview_container" style="display: none;" class="edits" >
 				<legend>', $text['preview_header'], '</legend>
-				<textarea id="preview" cols="150" rows="25"></textarea>
+				<textarea id="preview" rows="25"></textarea>
 			</fieldset>
 				<br />';
 }
@@ -79,7 +79,7 @@ function mod_templates()
 			<fieldset id="file-#FILEINDEX#" class="edits">
 				<input type="hidden" id="file-#FILEINDEX#-delete" value="0" />
 				<legend>
-					<span class="alignright">
+					<span class="floatbuttons">
 						<a href="#" class="delete_file" data-file="#FILEINDEX#">[', $text['button_delete'], ']</a>
 						<a href="#" class="restore_file" data-file="#FILEINDEX#" style="display: none;">[', $text['button_restore'], ']</a>
 						&nbsp;&mdash;&nbsp;
@@ -120,7 +120,7 @@ function mod_templates()
 				<fieldset id="file-#FILEINDEX#-edit-#EDITINDEX#" class="edit">
 					<input type="hidden" id="file-#FILEINDEX#-edit-#EDITINDEX#-delete" value="0" />
 					<legend>
-						<span class="alignright">
+						<span class="floatbuttons">
 							<a href="#" class="delete_change" data-file="#FILEINDEX#" data-edit="#EDITINDEX#">[', $text['button_delete'], ']</a>
 							<a href="#" class="restore_change" data-file="#FILEINDEX#" data-edit="#EDITINDEX#" style="display: none;">[', $text['button_restore'], ']</a>
 							&nbsp;&mdash;&nbsp;

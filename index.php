@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/settings.php');
 require_once(dirname(__FILE__) . '/_' . $pmg_action . 'maker.php');
 require_once(dirname(__FILE__) . '/language/' . $pmg['language'] . '.php');
 
-if (!empty($pmg['theme_integration_file']) && isset($pmg['theme_integration_file']) && file_exists($pmg['theme_integration_file']))
+if (!empty($pmg['theme_integration']) && isset($pmg['theme_integration_file']) && file_exists($pmg['theme_integration_file']))
 	require_once($pmg['theme_integration_file']);
 
 $headers['css'][] = array('name' => $pmg['style'] . '-css', 'href' => $pmg['assets'] . '/' . $pmg['style'] . '.css', 'media' => 'all');
