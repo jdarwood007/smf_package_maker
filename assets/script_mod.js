@@ -12,12 +12,21 @@ $(document).ready(function(){
 	edit_count =new Array();
 	edit_count[file_count] = 1;
 
-	/* Kick things off by creating a file. */
-	create_new_file();
+	/* Bind some stuff to our files, using live so they auto update as new stuff is added. */
+	$('.collapse_file').live('click', collapse_file);
+	$('.expand_file').live('click', expand_file);
+	$('.delete_file').live('click', delete_file);
+	$('.restore_file').live('click', restore_file);
 
-	$('#add_file').click(create_new_file);
+	/* Now we will bind to the actual edits, again using live. */
+	$('.collapse_change').live('click', collapse_edit);
+	$('.expand_change').live('click', expand_edit);
+	$('.delete_change').live('click', delete_edit);
+	$('.restore_change').live('click', restore_edit);
 
 	/* Give our buttons some actions. */
+	$('#add_file').click(create_new_file);
+	$('.add_edit').live('click', create_new_edit);
 	$('#show_preview').click(show_edit_preview);
 
 	/* The details and basic buttons. */
@@ -25,6 +34,9 @@ $(document).ready(function(){
 	$('#restore_basic').click(function(){$('#basic_info .info').show(); $('#restore_basic').hide(); $('#collapse_basic').show();});
 	$('#collapse_details').click(function(){$('#details_info .info').hide(); $('#collapse_details').hide(); $('#restore_details').show();});
 	$('#restore_details').click(function(){$('#details_info .info').show(); $('#restore_details').hide(); $('#collapse_details').show();});
+
+	/* Kick things off by creating a file. */
+	create_new_file();
 });
 
 /* Handles adding files */
@@ -33,16 +45,8 @@ function create_new_file()
 	/* We have been through this before */
 	$('#file_container').append($('#file_template').html().replace(/#FILEINDEX#/g, file_count));
 
-	/* We need to bind the new create edit button */
-	$('.add_edit').click(create_new_edit);
-
 	/* Now we pretend to click said element */
 	$('#file-' + file_count).find('.add_edit').click();
-
-	$('#file-' + file_count + ' .collapse_file').click(collapse_file);
-	$('#file-' + file_count + ' .expand_file').click(expand_file);
-	$('#file-' + file_count + ' .delete_file').click(delete_file);
-	$('#file-' + file_count + ' .restore_file').click(restore_file);
 
 	/* Move the index and add defaults */
 	file_count++;
@@ -59,11 +63,6 @@ function create_new_edit()
 	$('#file-' + file_index + '-edit_container').append($('#edit_template').html().replace(/#FILEINDEX#/g, file_index).replace(/#EDITINDEX#/g, edit_count[file_index]));
 	edit_count[file_index]++;
 
-	$('#file-' + file_index + '-edit_container .collapse_change').click(collapse_edit);
-	$('#file-' + file_index + '-edit_container .expand_change').click(expand_edit);
-	$('#file-' + file_index + '-edit_container .delete_change').click(delete_edit);
-	$('#file-' + file_index + '-edit_container .restore_change').click(restore_edit);
-
 	update_counter();
 }
 
@@ -77,6 +76,8 @@ function collapse_edit()
 	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').hide();
 	$('#file-' + file_index + '-edit-' + edit_index + ' .expand_change').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles expanding of the edit */
@@ -89,6 +90,8 @@ function expand_edit()
 	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
 	$('#file-' + file_index + '-edit-' + edit_index + ' .collapse_change').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles deleting a edit */
@@ -106,6 +109,7 @@ function delete_edit()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles restoring a edit */
@@ -123,6 +127,7 @@ function restore_edit()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles collapsing of the file */
@@ -134,6 +139,8 @@ function collapse_file()
 	$('#file-' + file_index + '-edit_container').hide();
 	$('#file-' + file_index + ' .expand_file').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles expanding of the file */
@@ -145,6 +152,8 @@ function expand_file()
 	$('#file-' + file_index + '-edit_container').show();
 	$('#file-' + file_index + ' .collapse_file').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles deleting a file */
@@ -161,6 +170,7 @@ function delete_file()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles restoring a file */
@@ -177,6 +187,7 @@ function restore_file()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* This is the nasty guy */

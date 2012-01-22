@@ -12,11 +12,25 @@ $(document).ready(function(){
 	instruct_count =new Array();
 	instruct_count[action_count] = 1;
 
-	/* Kick things off by creating a new action. */
-	create_new_action();
+	/* Bind some stuff to our actions, using live so they auto update as new stuff is added. */
+	$('.collapse_action').live('click', collapse_action);
+	$('.expand_action').live('click', expand_action);
+	$('.delete_action').live('click', delete_action);
+	$('.restore_action').live('click', restore_action);
+
+	/* Now we will bind to the actual changes, again using live. */
+	$('.collapse_change').live('click', collapse_instruct);
+	$('.expand_change').live('click', expand_instruct);
+	$('.delete_change').live('click', delete_instruct);
+	$('.restore_change').live('cick', restore_instruct);
+
+	/* Now we will bind to some toggles in those changes, again using live. */
+	$('.instruct_action').live('change', instruct_change);
+	$('.inline_check').live('change', instruct_inline);
 
 	/* Give our buttons some actions. */
 	$('#add_action').click(create_new_action);
+	$('.add_instruct').live('click', create_new_instruct);
 	$('#show_preview').click(show_instruct_preview);
 
 	/* The details and basic buttons. */
@@ -24,6 +38,9 @@ $(document).ready(function(){
 	$('#restore_basic').click(function(){$('#basic_info .info').show(); $('#restore_basic').hide(); $('#collapse_basic').show();});
 	$('#collapse_details').click(function(){$('#details_info .info').hide(); $('#collapse_details').hide(); $('#restore_details').show();});
 	$('#restore_details').click(function(){$('#details_info .info').show(); $('#restore_details').hide(); $('#collapse_details').show();});
+
+	/* Kick things off by creating a new action. */
+	create_new_action();
 });
 
 /* Handles adding actions */
@@ -32,17 +49,8 @@ function create_new_action()
 	/* We have been through this before */
 	$('#action_container').append($('#action_template').html().replace(/#ACTIONINDEX#/g, action_count));
 
-	/* We need to bind the new create instruct button */
-	$('.add_instruct').click(create_new_instruct);
-
 	/* Now we pretend to click said element */
 	$('#action-' + action_count).find('.add_instruct').click();
-
-	/* Now add some actions to our buttons */
-	$('#action-' + action_count + ' .collapse_action').click(collapse_action);
-	$('#action-' + action_count + ' .expand_action').click(expand_action);
-	$('#action-' + action_count + ' .delete_action').click(delete_action);
-	$('#action-' + action_count + ' .restore_action').click(restore_action);
 
 	/* Move the index and add defaults */
 	action_count++;
@@ -59,15 +67,7 @@ function create_new_instruct()
 
 	$('#action-' + action_index + '-instruct_container').append($('#instruct_template').html().replace(/#ACTIONINDEX#/g, action_index).replace(/#INSTRUCTINDEX#/g, instruct_count[action_index]));
 
-	$('#action-' + action_index + '-instruct_container .collapse_change').click(collapse_instruct);
-	$('#action-' + action_index + '-instruct_container .expand_change').click(expand_instruct);
-	$('#action-' + action_index + '-instruct_container .delete_change').click(delete_instruct);
-	$('#action-' + action_index + '-instruct_container .restore_change').click(restore_instruct);
-
-	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-action').change(instruct_change);
 	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-action').change();
-
-	$('#action-' + action_index + '-instruct-' + instruct_count[action_index] + '-inline').change(instruct_inline);
 
 	instruct_count[action_index]++;
 
@@ -122,7 +122,6 @@ function instruct_change()
 		/* We don't know what to do here! */
 		console.log("Unknown instruction action selected" [this_act, action_index, instruct_index], this);
 	}
-
 }
 
 /* Handles clicking the inline button */
@@ -152,6 +151,8 @@ function collapse_instruct()
 	$('#action-' + action_index + '-instruct-' + instruct_index + ' .edits').hide();
 	$('#action-' + action_index + '-instruct-' + instruct_index + ' .expand_change').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles expanding of the instruct */
@@ -164,6 +165,8 @@ function expand_instruct()
 	$('#action-' + action_index + '-instruct-' + instruct_index + ' .edits').show();
 	$('#action-' + action_index + '-instruct-' + instruct_index + ' .collapse_change').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles deleting a instruct */
@@ -181,6 +184,7 @@ function delete_instruct()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles restoring a instruct */
@@ -198,6 +202,7 @@ function restore_instruct()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles collapsing of the action */
@@ -209,6 +214,8 @@ function collapse_action()
 	$('#action-' + action_index + '-instruct_container').hide();
 	$('#action-' + action_index + ' .expand_action').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles expanding of the action */
@@ -220,6 +227,8 @@ function expand_action()
 	$('#action-' + action_index + '-instruct_container').show();
 	$('#action-' + action_index + ' .collapse_action').show();
 	$(this).hide();
+
+	return false;
 }
 
 /* Handles deleting a action */
@@ -236,6 +245,7 @@ function delete_action()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* Handles restoring a action */
@@ -252,6 +262,7 @@ function restore_action()
 	$(this).hide();
 
 	update_counter();
+	return false;
 }
 
 /* This is the nasty guy */
