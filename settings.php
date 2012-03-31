@@ -17,7 +17,7 @@ $pmg['scriptname'] = 'index.php';
 $pmg['downloadname'] = 'downloader.php';
 
 // Style to use.
-$pmg['style'] = 'default';
+$pmg['style'] = 'default'; // wordpress_zeesynergie
 
 // Integration with another site.
 $pmg['theme_integration'] = false;

@@ -295,6 +295,9 @@ function show_edit_preview()
 
 	}
 
+	preview += "\n" + '\
+</modification>';
+
 	$('#preview').text(preview);
 }
 

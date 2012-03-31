@@ -391,6 +391,9 @@ function show_instruct_preview()
 
 	}
 
+	preview += "\n" + '\
+</package-info>';
+
 	$('#preview').text(preview);
 }
 
