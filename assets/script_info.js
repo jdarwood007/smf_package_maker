@@ -14,8 +14,8 @@ $j(document).ready(function($){
 	instruct_count[action_count] = 1;
 
 	/* Bind some stuff to our actions, using live so they auto update as new stuff is added. */
-//	$j(document).on('click', '.collapse_action', collapse_action);
-	$j('.collapse_action').live('click', collapse_action);
+	$j(document).on('click', '.collapse_action', collapse_action);
+//	$j('.collapse_action').live('click', collapse_action);
 	$j('.expand_action').live('click', expand_action);
 	$j('.delete_action').live('click', delete_action);
 	$j('.restore_action').live('click', restore_action);

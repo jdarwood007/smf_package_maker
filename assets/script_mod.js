@@ -4,8 +4,7 @@
  * Repository: https://github.com/jdarwood007/smf_package_maker
  * License: BSD 3 Clause; See license.txt
 */
-
-$ = jQuery.noConflict();
+$j = jQuery.noConflict();
 
 /* This gets things going once the document has loaded, also makes sure JQuery is here. */
 jQuery(document).ready(function(){
@@ -15,27 +14,27 @@ jQuery(document).ready(function(){
 	edit_count[file_count] = 1;
 
 	/* Bind some stuff to our files, using live so they auto update as new stuff is added. */
-	$('.collapse_file').live('click', collapse_file);
-	$('.expand_file').live('click', expand_file);
-	$('.delete_file').live('click', delete_file);
-	$('.restore_file').live('click', restore_file);
+	$j('.collapse_file').live('click', collapse_file);
+	$j('.expand_file').live('click', expand_file);
+	$j('.delete_file').live('click', delete_file);
+	$j('.restore_file').live('click', restore_file);
 
 	/* Now we will bind to the actual edits, again using live. */
-	$('.collapse_change').live('click', collapse_edit);
-	$('.expand_change').live('click', expand_edit);
-	$('.delete_change').live('click', delete_edit);
-	$('.restore_change').live('click', restore_edit);
+	$j('.collapse_change').live('click', collapse_edit);
+	$j('.expand_change').live('click', expand_edit);
+	$j('.delete_change').live('click', delete_edit);
+	$j('.restore_change').live('click', restore_edit);
 
 	/* Give our buttons some actions. */
-	$('#add_file').click(create_new_file);
-	$('.add_edit').live('click', create_new_edit);
-	$('#show_preview').click(show_edit_preview);
+	$j('#add_file').click(create_new_file);
+	$j('.add_edit').live('click', create_new_edit);
+	$j('#show_preview').click(show_edit_preview);
 
 	/* The details and basic buttons. */
-	$('#collapse_basic').click(function(){$('#basic_info .info').hide(); $('#collapse_basic').hide(); $('#restore_basic').show();});
-	$('#restore_basic').click(function(){$('#basic_info .info').show(); $('#restore_basic').hide(); $('#collapse_basic').show();});
-	$('#collapse_details').click(function(){$('#details_info .info').hide(); $('#collapse_details').hide(); $('#restore_details').show();});
-	$('#restore_details').click(function(){$('#details_info .info').show(); $('#restore_details').hide(); $('#collapse_details').show();});
+	$j('#collapse_basic').click(function(){$j('#basic_info .info').hide(); $j('#collapse_basic').hide(); $j('#restore_basic').show();});
+	$j('#restore_basic').click(function(){$j('#basic_info .info').show(); $j('#restore_basic').hide(); $j('#collapse_basic').show();});
+	$j('#collapse_details').click(function(){$j('#details_info .info').hide(); $j('#collapse_details').hide(); $j('#restore_details').show();});
+	$j('#restore_details').click(function(){$j('#details_info .info').show(); $j('#restore_details').hide(); $j('#collapse_details').show();});
 
 	/* Kick things off by creating a file. */
 	create_new_file();
@@ -45,10 +44,10 @@ jQuery(document).ready(function(){
 function create_new_file()
 {
 	/* We have been through this before */
-	$('#file_container').append($('#file_template').html().replace(/#FILEINDEX#/g, file_count));
+	$j('#file_container').append($j('#file_template').html().replace(/#FILEINDEX#/g, file_count));
 
 	/* Now we pretend to click said element */
-	$('#file-' + file_count).find('.add_edit').click();
+	$j('#file-' + file_count).find('.add_edit').click();
 
 	/* Move the index and add defaults */
 	file_count++;
@@ -60,9 +59,9 @@ function create_new_file()
 /* Handles adding of edits */
 function create_new_edit()
 {
-	file_index = $(this).attr('data-file');
+	file_index = $j(this).attr('data-file');
 
-	$('#file-' + file_index + '-edit_container').append($('#edit_template').html().replace(/#FILEINDEX#/g, file_index).replace(/#EDITINDEX#/g, edit_count[file_index]));
+	$j('#file-' + file_index + '-edit_container').append($j('#edit_template').html().replace(/#FILEINDEX#/g, file_index).replace(/#EDITINDEX#/g, edit_count[file_index]));
 	edit_count[file_index]++;
 
 	update_counter();
@@ -71,13 +70,13 @@ function create_new_edit()
 /* Handles collapsing of the edit */
 function collapse_edit()
 {
-	file_index = $(this).attr('data-file');
-	edit_index = $(this).attr('data-edit');
+	file_index = $j(this).attr('data-file');
+	edit_index = $j(this).attr('data-edit');
 
 	/* Simply hide the edit, and give a expand button */
-	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').hide();
-	$('#file-' + file_index + '-edit-' + edit_index + ' .expand_change').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .edits').hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .expand_change').show();
+	$j(this).hide();
 
 	return false;
 }
@@ -85,13 +84,13 @@ function collapse_edit()
 /* Handles expanding of the edit */
 function expand_edit()
 {
-	file_index = $(this).attr('data-file');
-	edit_index = $(this).attr('data-edit');
+	file_index = $j(this).attr('data-file');
+	edit_index = $j(this).attr('data-edit');
 
 	/* Simply show the edit, and return to the original collapse button */
-	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
-	$('#file-' + file_index + '-edit-' + edit_index + ' .collapse_change').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .collapse_change').show();
+	$j(this).hide();
 
 	return false;
 }
@@ -99,16 +98,16 @@ function expand_edit()
 /* Handles deleting a edit */
 function delete_edit()
 {
-	file_index = $(this).attr('data-file');
-	edit_index = $(this).attr('data-edit');
+	file_index = $j(this).attr('data-file');
+	edit_index = $j(this).attr('data-edit');
 
 	/* First we let the data know its deleted. */
-	$('#file-' + file_index + '-edit-' + edit_index + '-delete').val('1');
+	$j('#file-' + file_index + '-edit-' + edit_index + '-delete').val('1');
 
 	/* Then we hide this header, collapse the edit and show the restore button */
-	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').hide();
-	$('#file-' + file_index + '-edit-' + edit_index + ' .restore_change').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .edits').hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .restore_change').show();
+	$j(this).hide();
 
 	update_counter();
 	return false;
@@ -117,16 +116,16 @@ function delete_edit()
 /* Handles restoring a edit */
 function restore_edit()
 {
-	file_index = $(this).attr('data-file');
-	edit_index = $(this).attr('data-edit');
+	file_index = $j(this).attr('data-file');
+	edit_index = $j(this).attr('data-edit');
 
 	/* First we let the data know its deleted. */
-	$('#file-' + file_index + '-edit-' + edit_index + '-delete').val('0');
+	$j('#file-' + file_index + '-edit-' + edit_index + '-delete').val('0');
 
 	/* Then we hide this header, collapse the edit and show the restore button */
-	$('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
-	$('#file-' + file_index + '-edit-' + edit_index + ' .delete_change').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .edits').show();
+	$j('#file-' + file_index + '-edit-' + edit_index + ' .delete_change').show();
+	$j(this).hide();
 
 	update_counter();
 	return false;
@@ -135,12 +134,12 @@ function restore_edit()
 /* Handles collapsing of the file */
 function collapse_file()
 {
-	file_index = $(this).attr('data-file');
+	file_index = $j(this).attr('data-file');
 
 	/* Simply hide the file, and give a expand button */
-	$('#file-' + file_index + '-edit_container').hide();
-	$('#file-' + file_index + ' .expand_file').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit_container').hide();
+	$j('#file-' + file_index + ' .expand_file').show();
+	$j(this).hide();
 
 	return false;
 }
@@ -148,12 +147,12 @@ function collapse_file()
 /* Handles expanding of the file */
 function expand_file()
 {
-	file_index = $(this).attr('data-file');
+	file_index = $j(this).attr('data-file');
 
 	/* Simply show the file, and return to the original collapse button */
-	$('#file-' + file_index + '-edit_container').show();
-	$('#file-' + file_index + ' .collapse_file').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit_container').show();
+	$j('#file-' + file_index + ' .collapse_file').show();
+	$j(this).hide();
 
 	return false;
 }
@@ -161,15 +160,15 @@ function expand_file()
 /* Handles deleting a file */
 function delete_file()
 {
-	file_index = $(this).attr('data-file');
+	file_index = $j(this).attr('data-file');
 
 	/* First we let the data know its deleted. */
-	$('#file-' + file_index + '-delete').val('1');
+	$j('#file-' + file_index + '-delete').val('1');
 
 	/* Then we hide this header, collapse the edit and show the restore button */
-	$('#file-' + file_index + '-edit_container').hide();
-	$('#file-' + file_index + ' .restore_file').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit_container').hide();
+	$j('#file-' + file_index + ' .restore_file').show();
+	$j(this).hide();
 
 	update_counter();
 	return false;
@@ -178,15 +177,15 @@ function delete_file()
 /* Handles restoring a file */
 function restore_file()
 {
-	file_index = $(this).attr('data-file');
+	file_index = $j(this).attr('data-file');
 
 	/* First we let the data know its deleted. */
-	$('#file-' + file_index + '-delete').val('0');
+	$j('#file-' + file_index + '-delete').val('0');
 
 	/* Then we hide this header, collapse the edit and show the restore button */
-	$('#file-' + file_index + '-edit_container').show();
-	$('#file-' + file_index + ' .delete_file').show();
-	$(this).hide();
+	$j('#file-' + file_index + '-edit_container').show();
+	$j('#file-' + file_index + ' .delete_file').show();
+	$j(this).hide();
 
 	update_counter();
 	return false;
@@ -195,11 +194,11 @@ function restore_file()
 /* This is the nasty guy */
 function show_edit_preview()
 {
-	$('#preview_container').show();
+	$j('#preview_container').show();
 
-	author = $('#basic_info_name').val().replace(/ /g,'_');
-	name = $('#basic_info_mod').val().replace(/ /g,'_');
-	version = $('#basic_info_version').val().replace(/ /g,'_');
+	author = $j('#basic_info_name').val().replace(/ /g,'_');
+	name = $j('#basic_info_mod').val().replace(/ /g,'_');
+	version = $j('#basic_info_version').val().replace(/ /g,'_');
 
 	preview = '<' + '?xml version="1.0"?' + '>' + "\n" + '\
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">' + "\n" + '\
@@ -212,7 +211,7 @@ function show_edit_preview()
 	for (i = 1; i < file_count; i++)
 	{
 		/* Skip this edit if we deleted it. */
-		if ($('#file-' + i + '-delete').val() == '1')
+		if ($j('#file-' + i + '-delete').val() == '1')
 		{
 			continue;
 		}
@@ -221,9 +220,9 @@ function show_edit_preview()
 		ecount = edit_count[i];
 
 		/* Get the file info */
-		file_type = $('#file-' + i + '-file_type').val();
-		file_name = $('#file-' + i + '-file_name').val();
-		file_fail = $('#file-' + i + '-file_fail').val();
+		file_type = $j('#file-' + i + '-file_type').val();
+		file_name = $j('#file-' + i + '-file_name').val();
+		file_fail = $j('#file-' + i + '-file_fail').val();
 
 		/* Start off with the file attribute */
 		preview += "\n" + '\
@@ -240,17 +239,17 @@ function show_edit_preview()
 		for (j = 1; j < ecount; j++)
 		{
 			/* Skip this edit if we deleted it. */
-			if ($('#file-' + i + '-edit-' + j + '-delete').val() == '1')
+			if ($j('#file-' + i + '-edit-' + j + '-delete').val() == '1')
 			{
 				continue;
 			}
 
 			/* Get our edit info */
-			edit_action		=	$('#file-' + i + '-edit-' + j + '-action').val();
-			edit_error		=	$('#file-' + i + '-edit-' + j + '-error').val();
-			edit_whitespace	=	$('#file-' + i + '-edit-' + j + '-action').is(':checked');
-			edit_search		=	$('#file-' + i + '-edit-' + j + '-search').val();
-			edit_replace	=	$('#file-' + i + '-edit-' + j + '-replace').val();
+			edit_action		=	$j('#file-' + i + '-edit-' + j + '-action').val();
+			edit_error		=	$j('#file-' + i + '-edit-' + j + '-error').val();
+			edit_whitespace	=	$j('#file-' + i + '-edit-' + j + '-action').is(':checked');
+			edit_search		=	$j('#file-' + i + '-edit-' + j + '-search').val();
+			edit_replace	=	$j('#file-' + i + '-edit-' + j + '-replace').val();
 
 			/* Start off our editing */
 			preview += "\n\
@@ -300,7 +299,7 @@ function show_edit_preview()
 	preview += "\n" + '\
 </modification>';
 
-	$('#preview').text(preview);
+	$j('#preview').text(preview);
 }
 
 function download_file_generate()
@@ -309,8 +308,8 @@ function download_file_generate()
 
 	$.generateFile({
 		filename	: 'install.xml',
-		content		: $('#preview').text(),
-		script		: $('#downloadername').val() + '?download'
+		content		: $j('#preview').text(),
+		script		: $j('#downloadername').val() + '?download'
 	});
 }
 
@@ -318,7 +317,7 @@ function download_file_data()
 {
 	show_edit_preview();
 
-	data = $.base64.encode($('#preview').text());
+	data = $.base64.encode($j('#preview').text());
 
 	/* No filename can be specified by a data URI */
 	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;
@@ -335,7 +334,7 @@ function update_counter()
 	for (i = 1; i < file_count; i++)
 	{
 		/* Skip this edit if we deleted it. */
-		if ($('#file-' + i + '-delete').val() == '1')
+		if ($j('#file-' + i + '-delete').val() == '1')
 			continue;
 
 		temp_file_count++;
@@ -343,7 +342,7 @@ function update_counter()
 		for (j = 1; j < edit_count[i]; j++)
 		{
 			/* Skip this edit if we deleted it. */
-			if ($('#file-' + i + '-edit-' + j + '-delete').val() == '1')
+			if ($j('#file-' + i + '-edit-' + j + '-delete').val() == '1')
 			{
 				continue;
 			}
@@ -351,22 +350,22 @@ function update_counter()
 			temp_edit_count++;
 
 			/* Find out what action we have */
-			if ($('#file-' + i + '-edit-' + j + '-action').val() == 'replace')
+			if ($j('#file-' + i + '-edit-' + j + '-action').val() == 'replace')
 			{
-				search = $('#file-' + i + '-edit-' + j + '-search').val().split("\n").length;
-				replace = $('#file-' + i + '-edit-' + j + '-replace').val().split("\n").length;
+				search = $j('#file-' + i + '-edit-' + j + '-search').val().split("\n").length;
+				replace = $j('#file-' + i + '-edit-' + j + '-replace').val().split("\n").length;
 
 				if (replace > search)
 					temp_line_count += (replace - search);
 			}
 			else
 			{
-				temp_line_count += $('#file-' + i + '-edit-' + j + '-replace').val().split("\n").length;
+				temp_line_count += $j('#file-' + i + '-edit-' + j + '-replace').val().split("\n").length;
 			}
 		}
 	}
 
-	$('#detail_files').val(temp_file_count);
-	$('#detail_edits').val(temp_edit_count);
-	$('#detail_lines').val(temp_line_count);
+	$j('#detail_files').val(temp_file_count);
+	$j('#detail_edits').val(temp_edit_count);
+	$j('#detail_lines').val(temp_line_count);
 }
