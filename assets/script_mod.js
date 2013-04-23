@@ -5,8 +5,10 @@
  * License: BSD 3 Clause; See license.txt
 */
 
+$ = jQuery.noConflict();
+
 /* This gets things going once the document has loaded, also makes sure JQuery is here. */
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	/* Start off some counting */
 	file_count = 1;
 	edit_count =new Array();
