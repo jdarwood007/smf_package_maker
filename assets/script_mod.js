@@ -14,20 +14,20 @@ jQuery(document).ready(function(){
 	edit_count[file_count] = 1;
 
 	/* Bind some stuff to our files, using live so they auto update as new stuff is added. */
-	$j('.collapse_file').live('click', collapse_file);
-	$j('.expand_file').live('click', expand_file);
-	$j('.delete_file').live('click', delete_file);
-	$j('.restore_file').live('click', restore_file);
+	$j(document).on('click', '.collapse_file', collapse_file);
+	$j(document).on('click', '.expand_file', expand_file);
+	$j(document).on('click', '.delete_file', delete_file);
+	$j(document).on('click', '.restore_file', restore_file);
 
 	/* Now we will bind to the actual edits, again using live. */
-	$j('.collapse_change').live('click', collapse_edit);
-	$j('.expand_change').live('click', expand_edit);
-	$j('.delete_change').live('click', delete_edit);
-	$j('.restore_change').live('click', restore_edit);
+	$j(document).on('click', '.collapse_change', collapse_edit);
+	$j(document).on('click', '.expand_change', expand_edit);
+	$j(document).on('click', '.delete_change', delete_edit);
+	$j(document).on('click', '.restore_change', restore_edit);
 
 	/* Give our buttons some actions. */
 	$j('#add_file').click(create_new_file);
-	$j('.add_edit').live('click', create_new_edit);
+	$j(document).on('click', '.add_edit', create_new_edit);
 	$j('#show_preview').click(show_edit_preview);
 
 	/* The details and basic buttons. */
@@ -229,7 +229,7 @@ function show_edit_preview()
 	<file name="' + file_type + '/' + file_name + '"';
 
 		/* We don't need to define the default error type. */
-		if ($.inArray(file_fail, ["ignore", "skip"]) > -1)
+		if ($j.inArray(file_fail, ["ignore", "skip"]) > -1)
 		{
 			preview += ' error="' + file_fail + '"';
 		}
@@ -256,7 +256,7 @@ function show_edit_preview()
 		<operation";
 
 			/* We only need to add error handling for non default */
-			if ($.inArray(edit_error, ["ignore", "required"]) > -1)
+			if ($j.inArray(edit_error, ["ignore", "required"]) > -1)
 			{
 				preview += ' error="' + file_fail + '"';
 			}
@@ -306,7 +306,7 @@ function download_file_generate()
 {
 	show_edit_preview();
 
-	$.generateFile({
+	$j.generateFile({
 		filename	: 'install.xml',
 		content		: $j('#preview').text(),
 		script		: $j('#downloadername').val() + '?download'
@@ -317,7 +317,7 @@ function download_file_data()
 {
 	show_edit_preview();
 
-	data = $.base64.encode($j('#preview').text());
+	data = $j.base64.encode($j('#preview').text());
 
 	/* No filename can be specified by a data URI */
 	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;

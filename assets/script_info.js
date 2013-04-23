@@ -15,24 +15,23 @@ $j(document).ready(function($){
 
 	/* Bind some stuff to our actions, using live so they auto update as new stuff is added. */
 	$j(document).on('click', '.collapse_action', collapse_action);
-//	$j('.collapse_action').live('click', collapse_action);
-	$j('.expand_action').live('click', expand_action);
-	$j('.delete_action').live('click', delete_action);
-	$j('.restore_action').live('click', restore_action);
+	$j(document).on('click', '.expand_action', expand_action);
+	$j(document).on('click', '.delete_action', delete_action);
+	$j(document).on('click', '.restore_action', restore_action);
 
 	/* Now we will bind to the actual changes, again using live. */
-	$j('.collapse_change').live('click', collapse_instruct);
-	$j('.expand_change').live('click', expand_instruct);
-	$j('.delete_change').live('click', delete_instruct);
-	$j('.restore_change').live('cick', restore_instruct);
+	$j(document).on('click', '.collapse_change', collapse_instruct);
+	$j(document).on('click', '.expand_change', expand_instruct);
+	$j(document).on('click', '.delete_change', delete_instruct);
+	$j(document).on('click', '.restore_change', restore_instruct);
 
 	/* Now we will bind to some toggles in those changes, again using live. */
-	$j('.instruct_action').live('change', instruct_change);
-	$j('.inline_check').live('change', instruct_inline);
+	$j(document).on('click', '.instruct_action', instruct_change);
+	$j(document).on('click', '.inline_check', instruct_inline);
 
 	/* Give our buttons some actions. */
 	$j('#add_action').click(create_new_action);
-	$j('.add_instruct').live('click', create_new_instruct);
+	$j(document).on('click', '.add_instruct', create_new_instruct);
 	$j('#show_preview').click(show_instruct_preview);
 
 	/* The details and basic buttons. */
@@ -93,7 +92,7 @@ function instruct_change()
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').show();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
 	}
-	else if ($.inArray(this_act, ["create-dir", "create-file", "remove-dir", "remove-file"]) > -1)
+	else if ($j.inArray(this_act, ["create-dir", "create-file", "remove-dir", "remove-file"]) > -1)
 	{
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
@@ -102,7 +101,7 @@ function instruct_change()
 
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').show();
 	}
-	else if ($.inArray(this_act, ["require-dir", "require-file", "move-dir", "move-file"]) > -1)
+	else if ($j.inArray(this_act, ["require-dir", "require-file", "move-dir", "move-file"]) > -1)
 	{
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
@@ -111,7 +110,7 @@ function instruct_change()
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').show();
 	}
-	else if ($.inArray(this_act, ["code", "database", "readme"]) > -1)
+	else if ($j.inArray(this_act, ["code", "database", "readme"]) > -1)
 	{
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').hide();
@@ -299,7 +298,7 @@ function show_instruct_preview()
 		action_smf_versions = $j('#action-' + i + '-smf_versions').val();
 
 		/* We only want valid actions */
-		if ($.inArray(action_type, ["install", "upgrade", "uninstall"]) > -1)
+		if ($j.inArray(action_type, ["install", "upgrade", "uninstall"]) > -1)
 		{
 			preview += "\n" + '\
 	<' + action_type;
@@ -335,7 +334,7 @@ function show_instruct_preview()
 			instruct_block		=	$j('#action-' + i + '-instruct-' + j + '-block').val().replace('<' + '?php', '').replace('?' + '>', '');
 
 			/* Try to make it easier to handle these */
-			if ($.inArray(instruct_action, ["modification", "code", "database", "readme"]) > -1)
+			if ($j.inArray(instruct_action, ["modification", "code", "database", "readme"]) > -1)
 			{
 				preview += "\n" + '\
 		<' + instruct_action;
@@ -347,7 +346,7 @@ function show_instruct_preview()
 					preview += ' reverse="true"';
 				}
 
-				if (instruct_inline && $.inArray(instruct_action, ["code", "database", "readme"]) > -1)
+				if (instruct_inline && $j.inArray(instruct_action, ["code", "database", "readme"]) > -1)
 				{
 					preview += ' inline="true">' + "\n" + instruct_block + "\n" + '\
 		</' + instruct_action + '>';
@@ -357,7 +356,7 @@ function show_instruct_preview()
 					preview += '>' + instruct_source + '</' + instruct_action + ">\n";
 				}
 			}
-			else if ($.inArray(instruct_action, ["create-dir", "create-file", "remove-dir", "remove-file"]) > -1)
+			else if ($j.inArray(instruct_action, ["create-dir", "create-file", "remove-dir", "remove-file"]) > -1)
 			{
 				/* It may seem confusing to use destination here as name while the others use source.
 					Logic is just easier to follow from the GUI to think of destination as what happens to the SMF install,
@@ -365,7 +364,7 @@ function show_instruct_preview()
 				preview += "\n" + '\
 		<' + instruct_action + ' name="' + instruct_destination + '" />';
 			}
-			else if ($.inArray(instruct_action, ["require-dir", "require-file", "move-dir", "move-file"]) > -1)
+			else if ($j.inArray(instruct_action, ["require-dir", "require-file", "move-dir", "move-file"]) > -1)
 			{
 				/* We use source and destination correctly here, see note above for those actions. */
 				preview += "\n" + '\
@@ -380,7 +379,7 @@ function show_instruct_preview()
 		}
 
 		/* Close up the action instruct */
-		if ($.inArray(action_type, ["install", "upgrade", "uninstall"]) > -1)
+		if ($j.inArray(action_type, ["install", "upgrade", "uninstall"]) > -1)
 		{
 			preview += "\n" + '\
 	</' + action_type + '>';
@@ -403,7 +402,7 @@ function download_action_generate()
 {
 	show_instruct_preview();
 
-	$.generateFile({
+	$j.generateFile({
 		filename	: 'package-info.xml',
 		content		: $j('#preview').text(),
 		script		: $j('#downloadername').val() + '?download'
@@ -414,7 +413,7 @@ function download_action_data()
 {
 	show_instruct_preview();
 
-	data = $.base64.encode($j('#preview').text());
+	data = $j.base64.encode($j('#preview').text());
 
 	/* No actionname can be specified by a data URI */
 	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;
