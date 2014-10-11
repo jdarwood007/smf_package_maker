@@ -16,13 +16,14 @@ $specialPage['pageTitlePrefix'] = 'SMF PacMan';
 require_once('../wp-ssi.php');
 
 // Our sauce link.
-$specialPage['source'] = 'See the source code: [<a href="http://git.sleepycode.com/?a=summary&p=SMF%20Package%20Manager%20Generator">Local</a>] [<a href="https://github.com/jdarwood007/smf_package_maker">GitHub</a>]';
+$specialPage['source'] = 'See the source code: [<a href="//git.sleepycode.com/?a=summary&p=SMF%20Package%20Manager%20Generator">Local</a>] [<a href="https://github.com/jdarwood007/smf_package_maker">GitHub</a>]';
 
 // Load the headers up.
 function pacman_header($headers)
 {
 	// Using Wordpress, we simply just add the hook and go.
 	add_action('wp_head', 'pacman_wp_int');
+
 }
 
 // We do nothing for the footer.
@@ -34,21 +35,11 @@ function pacman_footer()
 function pacman_wp_int()
 {
 	global $headers;
+	global $site_injected_css, $site_injected_js;
 
 	if (!empty($headers['css']))
-		foreach ($headers['css'] as $css)
-			echo '
-		<link rel="stylesheet" id="', $css['name'], '"  href="', $css['href'], '" type="text/css" media="all" />';
+		$site_injected_css = $headers['css'];
 
 	if (!empty($headers['js']))
-		foreach ($headers['js'] as $js)
-			if ($js['name'] != 'jquery')
-				echo '
-		<script type="text/javascript" src="', $js['src'], '"></script>';
-
-	// Pretty source code. I care about that.
-	if (!empty($headers['css']) && !empty($headers['js']))
-		echo '
-';
-
+		$site_injected_js = $headers['js'];
 }
