@@ -1,0 +1,149 @@
+/*** The Specific CSS starts here, the rest is the headers, footers and general ***/
+#pacmangen
+{
+	width: 100%;
+	background: #fff;
+	min-height: 41em;
+}
+
+/* Fixes some wordpress integrations */
+.entry #pacmangen
+{
+	margin-top: -2em;
+	margin-bottom: -4em;
+}
+
+#preview_container #preview
+{
+	width: 100%;
+}
+
+.floatbuttons
+{
+	float: right;
+}
+
+dl.info dt
+{
+	clear: both;
+	float: left;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 48%;
+}
+
+dl.info dd
+{
+	float: left;
+	margin: 0 0 3px;
+	padding: 0;
+	width: 48%;
+}
+
+dl.edits dt
+{
+	clear: both;
+	float: left;
+	margin: 0 0 10px;
+	padding: 0;
+	width: 15em;
+}
+
+dl.edits dd
+{
+	float: left;
+	margin: 0 0 3px;
+	padding: 0;
+}
+
+@font-face
+{
+	font-family: 'Paytone One';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Paytone One'), local('PaytoneOne'), url('http://themes.googleusercontent.com/static/fonts/paytoneone/v4/D_d4Nj6jwG2cmUCLYeqgKYbN6UDyHWBl620a-IRfuBk.woff') format('woff');
+}
+
+.alignleft
+{
+	float: left;
+}
+
+.alignright
+{
+	float: right;
+}
+
+#basic_info
+{
+	float: left;
+	margin-left: 10%;
+}
+
+#details_info
+{
+	float: right;
+	margin-right: 10%;
+}
+
+#basic_info, #details_info
+{
+	padding: 5px 10px;
+	background: #eee;
+	max-width: 25em;
+}
+
+#basic_info legend, #details_info legend
+{
+	padding: 3px 3px 1px 3px;
+	border-bottom: 1px solid #000;
+	background: #fff;
+}
+
+fieldset.edits
+{
+	padding: 5px 10px;
+	margin: 0 10px;
+	background: #eee;
+	border: 1px solid #000;
+}
+
+fieldset.edits fieldset
+{
+	padding: 5px 10px;
+	background: #eee;
+	border: 1px solid #000;
+	border-top: 1px dotted #000;
+}
+
+fieldset.edits legend
+{
+	width: 100%;
+	background: transparent;
+}
+
+.pad
+{
+	padding-left: 3em;
+}
+
+.action_index p#welcome
+{
+	padding: 3px 3px 1px 3px;
+	border: 1px solid #000;
+	background: #eee;
+	margin: 0 1em 2em 1em;
+}
+
+.action_index ol
+{
+	list-style: decimal;
+	font-size: 200%;
+	margin-left: 2em;
+	width: 100%;
+}
+
+.action_index ol li
+{
+	line-height: 2em;
+}
