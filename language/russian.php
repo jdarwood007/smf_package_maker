@@ -120,6 +120,6 @@ $text['button_expand'] = 'Развернуть';
 
 // The Index section
 	$text['index_welcome'] = 'Добро пожаловать в SMF Package Maker. Ниже три простых шага для создания вашей собственной модификации';
-	$text['index_mod'] = 'Mod Maker';
-	$text['index_info'] = 'Package-Info Maker';
+	$text['index_mod'] = 'Создать мод';
+	$text['index_info'] = 'Создать Package-Info';
 	$text['index_compress'] = 'Упаковать файл в .zip или .tgz (.tar.gz) архив';
