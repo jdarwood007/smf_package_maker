@@ -16,7 +16,7 @@ $text['script_name'] = 'SMF Package Generator';
 // Basic information section.
 $text['basic_info_header'] = 'Основная информация';
 $text['basic_your_name'] = 'Ваш ник';
-$text['basic_mod_name'] = 'Название модификации';
+$text['basic_mod_name'] = 'Название мода';
 $text['basic_mod_version'] = 'Версия';
 $text['basic_mod_type'] = 'Тип';
 $text['details_header'] = 'Детали';
@@ -61,7 +61,7 @@ $text['button_expand'] = 'Развернуть';
 	$text['edit_header_collapse'] = 'Свернуть';
 	$text['edit_header_expand'] = 'Развернуть';
 
-	$text['edit_ignore_whitespace'] = 'Игнорировать пустое пространство';
+	$text['edit_ignore_whitespace'] = 'Игнорировать пробелы';
 	$text['edit_search_for'] = 'Код для поиска';
 	$text['edit_replace_with'] = 'Код для замены';
 
@@ -74,7 +74,7 @@ $text['button_expand'] = 'Развернуть';
 	$text['edit_errors'] = 'Обработка ошибок';
 	$text['edit_errors_fail'] = 'Сбой установки (по умолчанию)';
 	$text['edit_errors_ignore'] = 'Создать файл с изменениями (игнорировать)';
-	$text['edit_errors_required'] = 'Require the search to fail';
+	$text['edit_errors_required'] = 'Изменения обязательны (иначе провал)';
 
 
 // The Package Info Section. Note that %1$s here represents the action number.
@@ -120,6 +120,6 @@ $text['button_expand'] = 'Развернуть';
 
 // The Index section
 	$text['index_welcome'] = 'Добро пожаловать в SMF Package Maker. Ниже три простых шага для создания вашей собственной модификации';
-	$text['index_mod'] = 'Mod Maker';
-	$text['index_info'] = 'Package-Info Maker';
+	$text['index_mod'] = 'Создать мод';
+	$text['index_info'] = 'Создать Package-Info';
 	$text['index_compress'] = 'Упаковать файл в .zip или .tgz (.tar.gz) архив';
