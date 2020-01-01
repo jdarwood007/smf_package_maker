@@ -148,6 +148,7 @@ function info_templates()
 							<option value="remove-dir">', $text['instruct_action_delete_dir'], '</option>
 							<option value="remove-file">', $text['instruct_action_delete_file'] , '</option>
 							<option value="readme">', $text['instruct_action_readme'], '</option>
+							<option value="hook">', $text['instruct_action_hook'], '</option>
 						<select></dd>
 
 						<dt class="reverse">', $text['action_reverse'], ':</dt>
@@ -164,6 +165,13 @@ function info_templates()
 
 						<dt class="code_block">', $text['action_code_block'], ':</dt>
 						<dd class="code_block"><textarea id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#-block" cols="75" rows="7"></textarea></dd>
+
+						<dt class="hook_name">', $text['action_hook_name'], ':</dt>
+						<dd class="hook_name"><input id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#-hook_name" type="text" /></dd>
+						<dt class="hook_function">', $text['action_hook_function'], ':</dt>
+						<dd class="hook_function"><input id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#-hook_function" type="text" /></dd>
+						<dt class="hook_file">', $text['action_hook_file'], ':</dt>
+						<dd class="hook_file"><input id="action-#ACTIONINDEX#-instruct-#INSTRUCTINDEX#-hook_file" type="text" /></dd>
 					</dl>
 				</fieldset>
 				<br />

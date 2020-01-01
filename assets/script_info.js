@@ -4,13 +4,13 @@
  * Repository: https://github.com/jdarwood007/smf_package_maker
  * License: BSD 3 Clause; See license.txt
 */
-$j = jQuery.noConflict();
+window.$j = jQuery.noConflict();
 
 /* This gets things going once the document has loaded, also makes sure JQuery is here. */
-$j(document).ready(function($){
+$j(document).ready(function(e){
 	/* Start off some counting */
-	action_count = 1;
-	instruct_count =new Array();
+	window.action_count = 1;
+	window.instruct_count = new Array();
 	instruct_count[action_count] = 1;
 
 	/* Bind some stuff to our actions, using live so they auto update as new stuff is added. */
@@ -64,7 +64,7 @@ function create_new_action()
 /* Handles adding of instructions */
 function create_new_instruct()
 {
-	action_index = $j(this).attr('data-action');
+	var action_index = $j(this).attr('data-action');
 
 	$j('#action-' + action_index + '-instruct_container').append($j('#instruct_template').html().replace(/#ACTIONINDEX#/g, action_index).replace(/#INSTRUCTINDEX#/g, instruct_count[action_index]));
 
@@ -78,9 +78,9 @@ function create_new_instruct()
 /* Handles a change in the instruction */
 function instruct_change()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
-	this_act = $j(this).val();
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
+	var this_act = $j(this).val();
 
 	/* Then choose how to hide them */
 	if (this_act == 'modification')
@@ -88,6 +88,9 @@ function instruct_change()
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .code_block').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_name').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_function').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_file').hide();
 
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').show();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
@@ -98,6 +101,9 @@ function instruct_change()
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .code_block').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_name').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_function').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_file').hide();
 
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').show();
 	}
@@ -106,6 +112,9 @@ function instruct_change()
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .code_block').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_name').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_function').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_file').hide();
 
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').show();
@@ -114,9 +123,25 @@ function instruct_change()
 	{
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').hide();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_name').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_function').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_file').hide();
 
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').show();
 		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').show();
+	}
+	else if ($j.inArray(this_act, ["hook"]) > -1)
+	{
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .destination').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .inline').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .code_block').hide();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .source').hide();
+
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_name').show();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_function').show();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .hook_file').show();
+		$j('#action-' + action_index + '-instruct-' + instruct_index + ' .reverse').show();
+
 	}
 	else
 	{
@@ -128,9 +153,9 @@ function instruct_change()
 /* Handles clicking the inline button */
 function instruct_inline()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
-	is_inline = $j(this).is(':checked');
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
+	var is_inline = $j(this).is(':checked');
 
 	if (is_inline)
 	{
@@ -145,8 +170,8 @@ function instruct_inline()
 /* Handles collapsing of the instruct */
 function collapse_instruct()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
 
 	/* Simply hide the instruct, and give a expand button */
 	$j('#action-' + action_index + '-instruct-' + instruct_index + ' .edits').hide();
@@ -159,8 +184,8 @@ function collapse_instruct()
 /* Handles expanding of the instruct */
 function expand_instruct()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
 
 	/* Simply show the instruct, and return to the original collapse button */
 	$j('#action-' + action_index + '-instruct-' + instruct_index + ' .edits').show();
@@ -173,8 +198,8 @@ function expand_instruct()
 /* Handles deleting a instruct */
 function delete_instruct()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
 
 	/* First we let the data know its deleted. */
 	$j('#action-' + action_index + '-instruct-' + instruct_index + '-delete').val('1');
@@ -191,8 +216,8 @@ function delete_instruct()
 /* Handles restoring a instruct */
 function restore_instruct()
 {
-	action_index = $j(this).attr('data-action');
-	instruct_index = $j(this).attr('data-instruct');
+	var action_index = $j(this).attr('data-action');
+	var instruct_index = $j(this).attr('data-instruct');
 
 	/* First we let the data know its deleted. */
 	$j('#action-' + action_index + '-instruct-' + instruct_index + '-delete').val('0');
@@ -209,7 +234,7 @@ function restore_instruct()
 /* Handles collapsing of the action */
 function collapse_action()
 {
-	action_index = $j(this).attr('data-action');
+	var action_index = $j(this).attr('data-action');
 
 	/* Simply hide the action, and give a expand button */
 	$j('#action-' + action_index + '-instruct_container').hide();
@@ -222,7 +247,7 @@ function collapse_action()
 /* Handles expanding of the action */
 function expand_action()
 {
-	action_index = $j(this).attr('data-action');
+	var action_index = $j(this).attr('data-action');
 
 	/* Simply show the action, and return to the original collapse button */
 	$j('#action-' + action_index + '-instruct_container').show();
@@ -235,7 +260,7 @@ function expand_action()
 /* Handles deleting a action */
 function delete_action()
 {
-	action_index = $j(this).attr('data-action');
+	var action_index = $j(this).attr('data-action');
 
 	/* First we let the data know its deleted. */
 	$j('#action-' + action_index + '-delete').val('1');
@@ -252,7 +277,7 @@ function delete_action()
 /* Handles restoring a action */
 function restore_action()
 {
-	action_index = $j(this).attr('data-action');
+	var action_index = $j(this).attr('data-action');
 
 	/* First we let the data know its deleted. */
 	$j('#action-' + action_index + '-delete').val('0');
@@ -271,13 +296,13 @@ function show_instruct_preview()
 {
 	$j('#preview_container').show();
 
-	author = $j('#basic_info_name').val().replace(/ /g,'_');
-	name = $j('#basic_info_mod').val().replace(/ /g,'_');
-	version = $j('#basic_info_version').val().replace(/ /g,'_');
-	type = $j('#basic_info_type').val();
+	var author = $j('#basic_info_name').val().replace(/ /g,'_');
+	var name = $j('#basic_info_mod').val().replace(/ /g,'_');
+	var version = $j('#basic_info_version').val().replace(/ /g,'_');
+	var type = $j('#basic_info_type').val();
 
-	preview = '<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">' + "\n" + '\
-<!-- This package was generated by SleePys Package Maker at http://sleepycode.com -->' + "\n" + '\
+	var preview = '<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">' + "\n" + '\
+<!-- This package was generated by SleePys Package Maker at https://sleepycode.com -->' + "\n" + '\
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">' + "\n" + '\
 	<id>' + author + ':' + name + '</id>' + "\n" + '\
 	<name>' + name + '</name>' + "\n" + '\
@@ -294,8 +319,8 @@ function show_instruct_preview()
 		}
 
 		/* Get the action info */
-		action_type = $j('#action-' + i + '-type').val();
-		action_smf_versions = $j('#action-' + i + '-smf_versions').val();
+		var action_type = $j('#action-' + i + '-type').val();
+		var action_smf_versions = $j('#action-' + i + '-smf_versions').val();
 
 		/* We only want valid actions */
 		if ($j.inArray(action_type, ["install", "upgrade", "uninstall"]) > -1)
@@ -326,12 +351,12 @@ function show_instruct_preview()
 			}
 
 			/* Get our instruction info */
-			instruct_action		=	$j('#action-' + i + '-instruct-' + j + '-action').val();
-			instruct_reverse	=	$j('#action-' + i + '-instruct-' + j + '-reverse').is(':checked');
-			instruct_inline		=	$j('#action-' + i + '-instruct-' + j + '-reverse').is(':checked');
-			instruct_source		=	$j('#action-' + i + '-instruct-' + j + '-source').val();
-			instruct_destination=	$j('#action-' + i + '-instruct-' + j + '-destination').val();
-			instruct_block		=	$j('#action-' + i + '-instruct-' + j + '-block').val().replace('<' + '?php', '').replace('?' + '>', '');
+			var instruct_action		=	$j('#action-' + i + '-instruct-' + j + '-action').val();
+			var instruct_reverse	=	$j('#action-' + i + '-instruct-' + j + '-reverse').is(':checked');
+			var instruct_inline		=	$j('#action-' + i + '-instruct-' + j + '-reverse').is(':checked');
+			var instruct_source		=	$j('#action-' + i + '-instruct-' + j + '-source').val();
+			var instruct_destination=	$j('#action-' + i + '-instruct-' + j + '-destination').val();
+			var instruct_block		=	$j('#action-' + i + '-instruct-' + j + '-block').val().replace('<' + '?php', '').replace('?' + '>', '');
 
 			/* Try to make it easier to handle these */
 			if ($j.inArray(instruct_action, ["modification", "code", "database", "readme"]) > -1)
@@ -413,7 +438,7 @@ function download_action_data()
 {
 	show_instruct_preview();
 
-	data = $j.base64.encode($j('#preview').text());
+	var data = $j.base64.encode($j('#preview').text());
 
 	/* No actionname can be specified by a data URI */
 	window.location = 'data:application/octet-stream;charset=utf-8;base64,' + data;
@@ -422,8 +447,8 @@ function download_action_data()
 /* Updates our details counters */
 function update_counter()
 {
-	temp_action_count = 0;
-	temp_instruct_count = 0;
+	var temp_action_count = 0;
+	var temp_instruct_count = 0;
 
 	/* Because of deleted actions, we can't simply use length */
 	for (i = 1; i < action_count; i++)

@@ -8,9 +8,8 @@
 define('PacManGen', true);
 
 // Default our action.
-if (!isset($_GET['action']) || !in_array($_GET['action'], array('mod', 'info')))
-	$pmg_action = 'index';
-else
+$pmg_action = 'index';
+if (isset($_GET['action']) && in_array($_GET['action'], array('mod', 'info')))
 	$pmg_action = $_GET['action'];
 
 // Load up some files.
@@ -34,7 +33,10 @@ if ($pmg_action != 'index')
 if (!empty($pmg['theme_integration']) && function_exists('pacman_header'))
 	pacman_header($headers);
 else
+{
 	default_pacman_header($headers);
+	default_pacman_body_upper();
+}
 
 	echo '
 		<div id="pacmangen" class="action_', $pmg_action, '">';
@@ -58,7 +60,10 @@ $function();
 if (!empty($pmg['theme_integration']) && function_exists('pacman_footer'))
 	pacman_footer();
 else
+{
+	default_pacman_body_lower();
 	default_pacman_footer();
+}
 
 function default_pacman_header($headers)
 {
@@ -72,23 +77,39 @@ function default_pacman_header($headers)
 	<title>', $pmg['page_title'], '</title>';
 
 	if (!empty($headers['css']))
-		foreach ($headers['css'] as $css)
-			echo '
-		<link rel="stylesheet" id="', $css['name'], '" href="', $css['href'], '" type="text/css" media="', !empty($css['media']) ? $css['media'] : 'all', '">';
+		default_pacman_header_css($headers['css']);
 
 	if (!empty($headers['js']))
-		foreach ($headers['js'] as $js)
-			echo '
-		<script type="text/javascript" src="', $js['src'], '"></script>';
+		default_pacman_header_js($headers['js']);
 
-	if (!empty($headers['others']))
+	if (!empty($headers['others']) && is_array($headers['others']))
 		echo explode('
 		', $headers['others']);
 
 	echo '
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
+</head>';
+}
 
+function default_pacman_header_css($headers)
+{
+	foreach ($headers as $css)
+		echo '
+		<link rel="stylesheet" id="', $css['name'], '" href="', $css['href'], '" type="text/css" media="', !empty($css['media']) ? $css['media'] : 'all', '">';
+}
+
+function default_pacman_header_js($headers)
+{
+	foreach ($headers as $js)
+		echo '
+		<script type="text/javascript" src="', $js['src'], '"></script>';
+}
+
+function default_pacman_body_upper()
+{
+	global $pmg, $text;
+
+	echo '
 <body class="home blog">
 <div id="wrapper">
 	<div id="header">
@@ -107,20 +128,22 @@ function default_pacman_header($headers)
 	<div id="container">';
 }
 
-function default_pacman_footer()
+function default_pacman_body_lower()
 {
 	echo '
 	</div>
 </div>
 <div id="footer">
 	<!-- Please give credit where credit is due -->
-	<div id="foot"><span class="alignright"><a href="http://sleepycode.com">SMF Package Manager Generator by JeremyD (SleePy)</a></span></div>
+	<div id="foot"><span class="alignright"><a href="https://sleepycode.com">SMF Package Manager Generator by JeremyD (SleePy)</a></span></div>
 	<div class="clear"></div>
 	</div>
 </div>';
+}
 
+function default_pacman_footer()
+{
 	echo '
 </body>
 </html>';
-
 }

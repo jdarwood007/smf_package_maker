@@ -9,7 +9,7 @@ if (!defined('PacManGen')) { exit('[' . basename(__FILE__) . '] Direct access re
 
 /*
  * WordPress Integration
- * http://sleepycode.com/2011/11/wordpress-templates-on-non-wordpress-pages
+ * https://sleepycode.com/2011/11/wordpress-templates-on-non-wordpress-pages
 */
 $specialPage['headerTitle'] = 'SMF PacMan';
 $specialPage['pageTitlePrefix'] = 'SMF PacMan';
@@ -23,7 +23,7 @@ function pacman_header($headers)
 {
 	// Using Wordpress, we simply just add the hook and go.
 	add_action('wp_head', 'pacman_wp_int');
-
+	assert($headers);
 }
 
 // We do nothing for the footer.

@@ -110,12 +110,16 @@ $text['button_expand'] = 'Expand';
 	$text['instruct_action_delete_dir'] = 'Remove a Directory';
 	$text['instruct_action_delete_file'] = 'Remove a File';
 	$text['instruct_action_readme'] = 'Readme Installer';
+	$text['instruct_action_hook'] = 'Hook';
 
 	$text['action_inline'] = 'Inline Edit';
 	$text['action_reverse'] = 'Reverse Modification Edits';
 	$text['action_destination'] = 'Destination';
 	$text['action_source'] = 'File/Folder to Include';
 	$text['action_code_block'] = 'Inline Code';
+	$text['action_hook_name'] = 'Hook Name';
+	$text['action_hook_function'] = 'Hook Function';
+	$text['action_hook_file'] = 'Hook File';
 	
 
 // The Index section

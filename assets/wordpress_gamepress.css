@@ -60,7 +60,7 @@ dl.edits dd
 	font-family: 'Paytone One';
 	font-style: normal;
 	font-weight: normal;
-	src: local('Paytone One'), local('PaytoneOne'), url('http://themes.googleusercontent.com/static/fonts/paytoneone/v4/D_d4Nj6jwG2cmUCLYeqgKYbN6UDyHWBl620a-IRfuBk.woff') format('woff');
+	src: local('Paytone One'), local('PaytoneOne'), url('https://themes.googleusercontent.com/static/fonts/paytoneone/v4/D_d4Nj6jwG2cmUCLYeqgKYbN6UDyHWBl620a-IRfuBk.woff') format('woff');
 }
 
 .alignleft
